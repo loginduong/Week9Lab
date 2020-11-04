@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
 
         if (userEmail == null || userEmail.isEmpty()) {
             String email = request.getParameter("email");
-            int active = 1;
+            boolean active = 1;
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String password = request.getParameter("password");

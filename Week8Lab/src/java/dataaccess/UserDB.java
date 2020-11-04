@@ -5,13 +5,10 @@ import java.sql.PreparedStatement;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import models.*;
 
 public class UserDB {
-
-    public static List<User> getAll(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public List<User> getAll() throws Exception {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
@@ -41,23 +38,15 @@ public class UserDB {
     }
 
     public void insert(User user) throws Exception {
-        ConnectionPool cp = ConnectionPool.getInstance();
-        Connection con = cp.getConnection();
-        PreparedStatement ps = null;
-        String sql = "INSERT INTO user (email, active, first_name, last_name, password, role) VALUES (?, ?, ?, ?, ?, ?)";
+           EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+           EntityTransaction et = em.getTransaction();
         
         try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, user.getEmail());
-            ps.setInt(2, user.getActive());
-            ps.setString(3, user.getFirstName());
-            ps.setString(4, user.getLastName());
-            ps.setString(5, user.getPassword());
-            ps.setInt(6, user.getRole());
-            ps.executeUpdate();
+            et.begin();
+            em.persist(user);
+            em.merge(user);
         } finally {
-            DBUtil.closePreparedStatement(ps);
-            cp.freeConnection(con);
+      
         }
     }
 
