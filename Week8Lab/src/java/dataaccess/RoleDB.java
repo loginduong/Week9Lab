@@ -15,6 +15,17 @@ public class RoleDB {
             em.close();
         }
     }
+    
+    public Role get(int roleId) {
+         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+         try {
+            Role role = em.find(Role.class, roleId);
+            return role;
+        } finally {
+            em.close();
+        }
+         
+    }
 
 }
     
