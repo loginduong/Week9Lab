@@ -12,9 +12,10 @@ public class RoleDB {
         
         
         try {
-            List <Role> role = em.createNamedQuery("Role.findAll", Role.class);
+            List <Role> role = em.createNamedQuery("Role.findAll", Role.class).getResultList();
             return role;
         } finally {
             em.close();
         }
 }
+    }
