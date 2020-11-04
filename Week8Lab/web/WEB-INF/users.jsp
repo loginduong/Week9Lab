@@ -59,7 +59,7 @@
                         <br/>
                         <select name="role">
                             <c:forEach items="${role}" var="read">    
-                                <option value="${read.roleId}" <c:if test="${editUser.role.roleId eq read.roleId}">selected</c:if>>${read.roleName}</option>
+                                <option value="${read.roleId}" <c:if test="${editUser.role eq read.roleId}">selected</c:if>>${read.roleName}</option>
                             </c:forEach>
                         </select><br/>
                         <input type="hidden" name="action" value="update">

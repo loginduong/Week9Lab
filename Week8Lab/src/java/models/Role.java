@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
-    , @NamedQuery(name = "Role.findByRoleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId")
+    , @NamedQuery(name = "Role.findByroleId", query = "SELECT r FROM Role r WHERE r.roleId = :roleId")
     , @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
 public class Role implements Serializable {
 
@@ -56,11 +56,11 @@ public class Role implements Serializable {
         this.roleName = roleName;
     }
 
-    public Integer getRoleId() {
+    public Integer getroleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setroleId(Integer roleId) {
         this.roleId = roleId;
     }
 
