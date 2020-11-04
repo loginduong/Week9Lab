@@ -46,8 +46,10 @@ public class UserServlet extends HttpServlet {
         }
                 
         UserService users = new UserService();
+        RoleServices roles = new RoleServices();
         
         User newUser = null;
+        Role newRole = null;
         String userEmail = request.getParameter("useremail");
 
         if (userEmail == null || userEmail.isEmpty()) {
@@ -56,8 +58,7 @@ public class UserServlet extends HttpServlet {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String password = request.getParameter("password");
-            
-
+            newRole = new Role(Integer.parseInt(request.getParameter("role")));
             newUser = new User(email, active, firstName, lastName, password);            
         }
         

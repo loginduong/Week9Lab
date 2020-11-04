@@ -71,7 +71,7 @@ public class UserDB {
     public void delete(String email) throws Exception {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction et = em.getTransaction();
-
+        
         try {
             User user = em.find(User.class, email);
             Role role = user.getRole();

@@ -93,8 +93,9 @@
                             <td>${read.firstName}</td>
                             <td>${read.lastName}</td>
                             <td>
-                            ${read.role.roleName}
-                               
+                                <c:forEach items="${role}" var="readA">    
+                                    <c:if test="${read.role.roleId eq readA.roleId}">${readA.roleName}</c:if>
+                                </c:forEach>
                             </td>
                             <td>
                                 <form method="post" action="user">
