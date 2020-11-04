@@ -34,7 +34,7 @@
                         <br/>
                         <select name="role">
                             <c:forEach items="${role}" var="read">    
-                                <option value="${read.roleID}">${read.roleName}</option>
+                                <option value="${read.roleId}">${read.roleName}</option>
                             </c:forEach>
                         </select><br/>
                         <input type="hidden" name="action" value="add">
@@ -59,7 +59,7 @@
                         <br/>
                         <select name="role">
                             <c:forEach items="${role}" var="read">    
-                                <option value="${read.roleID}" <c:if test="${editUser.role eq read.roleID}">selected</c:if>>${read.roleName}</option>
+                                <option value="${read.roleId}" <c:if test="${editUser.role eq read.roleId}">selected</c:if>>${read.roleName}</option>
                             </c:forEach>
                         </select><br/>
                         <input type="hidden" name="action" value="update">
@@ -91,9 +91,8 @@
                             <td>${read.firstName}</td>
                             <td>${read.lastName}</td>
                             <td>
-                                <c:forEach items="${role}" var="readA">    
-                                    <c:if test="${read.role eq readA.roleID}">${readA.roleName}</c:if>
-                                </c:forEach>
+                            ${read.role.roleName}
+                               
                             </td>
                             <td>
                                 <form method="post" action="user">
