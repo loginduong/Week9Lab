@@ -56,10 +56,12 @@ public class UserServlet extends HttpServlet {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String password = request.getParameter("password");
-            int role = Integer.parseInt(request.getParameter("role"));
+            
 
             newUser = new User(email, active, firstName, lastName, password);            
         }
+        
+        
 
         try {
             switch (action) {
@@ -74,12 +76,14 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "edit":
                     request.setAttribute("editUser", users.get(userEmail));
+                    
                     break;
             }
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+        
         doGet(request, response);
     }
 

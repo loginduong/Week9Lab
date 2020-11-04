@@ -41,6 +41,7 @@ public class UserDB {
             Role role = user.getRole();
             et.begin();
             em.persist(user);
+            role.getUserList().add(user);
             em.merge(role);
             et.commit();
 
@@ -76,6 +77,7 @@ public class UserDB {
             Role role = user.getRole();
             et.begin();
             em.remove(em.merge(user));
+            role.getUserList().remove(user);
             em.merge(role);
             et.commit();
 
