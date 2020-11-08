@@ -18,7 +18,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         UserService users = new UserService();
         RoleServices roles = new RoleServices();
 
@@ -37,19 +37,17 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
-        
+
         if (action.equalsIgnoreCase("cancel")) {
             doGet(request, response);
             return;
         }
-                
+
         UserService users = new UserService();
-        RoleServices roles = new RoleServices();
-        
+
         User newUser = null;
-        Role newRole = null;
         String userEmail = request.getParameter("useremail");
 
         if (userEmail == null || userEmail.isEmpty()) {
@@ -58,11 +56,15 @@ public class UserServlet extends HttpServlet {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String password = request.getParameter("password");
-            newRole = new Role(Integer.parseInt(request.getParameter("role")));
-            newUser = new User(email, active, firstName, lastName, password);            
+            try {
+                Role role = users.get(email).getRole();
+                newUser = new User(email, active, firstName, lastName, password);
+                newUser.setRole(role);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
-        
-        
 
         try {
             switch (action) {
@@ -77,14 +79,14 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "edit":
                     request.setAttribute("editUser", users.get(userEmail));
-                    
+
                     break;
             }
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-        
+
         doGet(request, response);
     }
 

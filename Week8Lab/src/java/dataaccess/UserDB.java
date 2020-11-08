@@ -1,6 +1,5 @@
 package dataaccess;
 
-
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -55,14 +54,14 @@ public class UserDB {
 
     public void update(User user) throws Exception {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
-        EntityTransaction et = em.getTransaction();
-
+        EntityTransaction tr = em.getTransaction();
+        
         try {
-            et.begin();
+            tr.begin();
             em.merge(user);
-            et.commit();
+            tr.commit();
         } catch (Exception e) {
-            et.rollback();
+            tr.rollback();
         } finally {
             em.close();
         }
@@ -71,7 +70,7 @@ public class UserDB {
     public void delete(String email) throws Exception {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction et = em.getTransaction();
-        
+
         try {
             User user = em.find(User.class, email);
             Role role = user.getRole();
